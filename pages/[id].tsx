@@ -30,7 +30,7 @@ export default function Products(props: any) {
   });
 
   // список продуктов
-  const products = dataThisOrder[0].products;
+  const products = dataThisOrder[0]?.products;
 
   // hooks
   const [showProduct, setShowProduct] = useState(products);
@@ -42,7 +42,7 @@ export default function Products(props: any) {
   const types = useRef<string[]>(
     Array.from(
       new Set(
-        products.map((el: any) => {
+        products?.map((el: any) => {
           return el.type;
         })
       )
@@ -51,7 +51,7 @@ export default function Products(props: any) {
   const specification = useRef<string[]>(
     Array.from(
       new Set(
-        products.map((el: any) => {
+        products?.map((el: any) => {
           return el.specification;
         })
       )
@@ -183,7 +183,7 @@ export default function Products(props: any) {
   return (
     <section className="Products">
       <header>
-        <h1>Продукты / {dataThisOrder[0].products.length}</h1>
+        <h1>Продукты / {dataThisOrder[0]?.products.length}</h1>
         <div>
           <div>
             <p>Тип:</p>
@@ -225,7 +225,7 @@ export default function Products(props: any) {
       </header>
 
       <ul>
-        {showProduct.map((el: any) => {
+        {showProduct?.map((el: any) => {
           return (
             <ProductItem
               key={el.id}
