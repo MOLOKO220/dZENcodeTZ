@@ -498,7 +498,7 @@ const mainReducer = createSlice({
     },
 
     addProduct(state, action) {
-      // добавляем новый заказ
+      // добавляем новый продукт
       state.orders.map((el) => {
         if (el.id == action.payload.orderId) {
           el.products.push(action.payload);
