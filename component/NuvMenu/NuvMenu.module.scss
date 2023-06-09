@@ -1,0 +1,77 @@
+.NuvMenu {
+  max-width: 300px;
+  width: 100vw;
+  height: 100vh;
+  padding: 80px 0 0 0;
+  box-shadow: 5px 0px 20px rgba(114, 114, 114, 0.4);
+  position: fixed;
+  z-index: 800;
+  left: -250px;
+  transition: 300ms;
+  background: white;
+  > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    .NuvMenu__user_wrapp {
+      height: 100px;
+      width: 100px;
+      margin: 30px 0;
+      position: relative;
+      > img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+      }
+      > div {
+        background: white;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        position: absolute;
+        right: -20px;
+        bottom: -20px;
+        box-shadow: 1px 1px 13px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: "Roboto", sans-serif;
+      > li {
+        margin: 10px 0;
+        transition: 300ms;
+        &:hover {
+          transform: scale(1.2);
+        }
+        > a {
+          color: black;
+        }
+      }
+    }
+    .NuvMenu__arrow_btn {
+      height: 30px;
+      width: 30px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      transition: 300ms;
+    }
+    .NuvMenu__arrow_btn_active {
+      transform: rotate(0.5turn);
+    }
+  }
+}
+.NuvMenu__active {
+  left: 0px;
+}

@@ -1,14 +1,31 @@
-import { render, screen } from '@testing-library/react'
-import Home from '@/pages/index'
+import { render, screen } from "@testing-library/react";
+import * as reduxHooks from "react-redux";
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+import Index from "../pages/index";
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
+// нужно для работы на последней версией redux
+const mockDispatch = jest.fn();
+const mockSelector = jest.fn();
 
-    expect(heading).toBeInTheDocument()
-  })
-})
+jest.mock("react-redux", () => ({
+  ...jest.requireActual("react-redux"),
+  useDispatch: () => mockDispatch,
+  useSelector: () => mockSelector,
+}));
+
+describe("Index", () => {
+  it("Index render", () => {
+    jest.spyOn(reduxHooks, "useSelector").mockReturnValue([
+      {
+        id: 1,
+        title: "Order1",
+        date: "29.06.2017",
+        description: "string",
+        products: [],
+      },
+    ]);
+
+    render(<Index />);
+    expect(screen.getByText("Приходы / 1")).toBeInTheDocument();
+  });
+});

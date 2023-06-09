@@ -1,65 +1,94 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import React, { useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import nextId from "react-id-generator";
+import { addOrder } from "../storage/mainReducer";
 
-import styles from '@/pages/index.module.css'
+import Order from "../component/Order/Order";
 
-export default function Home() {
+export default function index() {
+  // redux
+  interface ordersType {
+    id: number;
+    title: string;
+    date: string;
+    description: string;
+    products: any;
+  }
+
+  const orders: ordersType[] = useSelector((state: any) => state.main.orders);
+  const dispatch = useDispatch();
+
+  // hooks
+  const [popupOrderTitle, setPopupOrderTitle] = useState("");
+  const popupWrapp = useRef<HTMLDivElement>(null);
+
+  // popup
+  function openPopup() {
+    popupWrapp.current?.classList.add("Orders__popup__active");
+  }
+
+  function closePopup() {
+    popupWrapp.current?.classList.remove("Orders__popup__active");
+    setPopupOrderTitle("");
+  }
+
+  function createNewOrder() {
+    const d = new Date();
+    // фармеруем объект
+    const newOrder = {
+      id: nextId(),
+      title: popupOrderTitle,
+      date: d.toISOString(),
+      description: "it's not implemented",
+      products: [],
+    };
+    // проверка на количество символов
+    if (popupOrderTitle.length > 4) {
+      dispatch(addOrder(newOrder));
+      popupWrapp.current?.classList.remove("Orders__popup__active");
+
+      setPopupOrderTitle("");
+    } else {
+      popupWrapp.current?.classList.add("Orders__popup__error");
+      setTimeout(() => {
+        popupWrapp.current?.classList.remove("Orders__popup__error");
+      }, 3000);
+    }
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a href="https://vercel.com/new" className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <main className="Orders">
+      <header>
+        <div onClick={openPopup}>
+          <div>+</div>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
-  )
+        <h1>Приходы / {orders.length}</h1>
+      </header>
+      <ul>
+        {orders.map((el) => {
+          return <Order key={el.id} data={el} />;
+        })}
+      </ul>
+      <div className="Orders__popup" ref={popupWrapp}>
+        <div>
+          <h5>Создать заказ!</h5>
+          <label>
+            <input
+              type="text"
+              placeholder="Названия заказа"
+              onChange={(e) => {
+                setPopupOrderTitle(e.target.value);
+              }}
+              value={popupOrderTitle}
+            />
+            <p>Названия должно содержать больше 4 символов</p>
+          </label>
+          <footer>
+            <button onClick={closePopup}>Отмена</button>
+            <button onClick={createNewOrder}>Создать</button>
+          </footer>
+        </div>
+      </div>
+    </main>
+  );
 }

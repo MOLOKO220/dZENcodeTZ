@@ -1,29 +1,30 @@
-# Next.js + Jest
+Стек: TypeScript, Nextjs, redux(redux-toolkit), jest(RTL), html, scss, react-id-generator.
 
-This example shows how to configure Jest to work with Next.js.
+---
 
-This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
+Суть приложения: Отображения групп тавара(Order), с возможностью манипуляции: создания и удаления групп, добавления и удаления товаров(ProductItem) в них.
 
-## How to Use
+---
 
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
+Cтруктура приложения:
 
-In your terminal, run the following command:
+2 страницы:
 
-```bash
-npx create-next-app --example with-jest with-jest-app
-```
+index.tsx - Главная страница, на ней отображаются список группы товара(Order), также на ней есть popup окно для создания новых "Order".
 
-```bash
-yarn create next-app --example with-jest with-jest-app
-```
+[id].tsx - Страница конкретной группы товаров, на ней отображается список товаров содержащуюся в данном конкретном Order. Отображает сам список товаров(<ProductItem/>), также есть popup окно для добавления новых товаров(<ProductItem/>). И есть два <select/> для фильтрации товара по "типам" и "спецификациям".
 
-```bash
-pnpm create next-app --example with-jest with-jest-app
-```
+5 компонентов:
+Header - Небольшой компонент, на котором помимо лого отображается текущая дата, день недели и время.
 
-## Run Jest Tests
+NuvMenu - Меню навигации, линки на несуществующие страницы,только одна ссылка без заглушки, она ведет на главную страницу(index.tsx). Плюс небольшая "анимация", при нажатии на стрелку меню уходит в лево за экран.
 
-```bash
-npm test
-```
+Order - Обёртка группы товаров, в ней отображается информация о группе: название, количество товара в группе, дата создания группы и общая стоимость группы в долларах и гривнах (с курсом 1$ = 40₴). Также тут есть 2 кнопки, burgeBtn - онаже ссылка на [id].tsx, и deleteBtn - вызывает popup с подтверждением на удаления данной группы.
+
+ProductItem - по аналоги с компонентом <Order/>, отображает информацию по конкретному продукту: img, название, тип, спецификацию, даты начала и конца гарантии, цена в $ и в ₴, название группы товаров(Order), дата добавления данной единицы товара. Ну и deleteBtn - вызывает popup с подтверждением на удаления данного товара.
+
+Wrapper - просто обертка для добавления <NuvMenu />
+
+---
+
+дальше storage, с mainReducer.tsx - тут вся redux логика взаимодействия с хранилищем.
