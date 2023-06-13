@@ -60,8 +60,8 @@ export default function ProductItem(props: ProductItemType) {
   function closeRemovePopup() {
     RemovePopup.current?.classList.remove(style.removePopup__active);
   }
-  // удаляем заказ
-  function deleteOreder() {
+  // удаляем продукта
+  function deleteProduct() {
     dispatch(removaProduct({ id: props.id, orderId: props.orderId }));
   }
   return (
@@ -105,7 +105,7 @@ export default function ProductItem(props: ProductItemType) {
           </main>
           <footer>
             <button onClick={closeRemovePopup}>ОТМЕНИТЬ</button>
-            <button onClick={deleteOreder}>УДАЛИТЬ</button>
+            <button onClick={deleteProduct}>УДАЛИТЬ</button>
           </footer>
           <img
             className={style.ProductItem__removePopup__closeBtn}

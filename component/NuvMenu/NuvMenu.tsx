@@ -26,7 +26,7 @@ export default function NuvMenu() {
             <Link href="/">ПРИХОД</Link>
           </li>
           <li>
-            <Link href="#">ГРУППЫ</Link>
+            <Link href="/Group">ГРУППЫ</Link>
           </li>
           <li>
             <Link href="#">ПРОДУКТЫ</Link>

@@ -481,8 +481,7 @@ const mainReducer = createSlice({
     removaProduct(state, action) {
       // удаляем продукт из заказа
       const newProducts = state.orders.map((el) => {
-        if (el.id === action.payload.orderId) {
-          console.log(el);
+        if (el.id == action.payload.orderId) {
           el.products = el.products.filter((el2) => {
             return el2.id != action.payload.id;
           });
@@ -498,7 +497,7 @@ const mainReducer = createSlice({
     },
 
     addProduct(state, action) {
-      // добавляем новый заказ
+      // добавляем новый продукт
       state.orders.map((el) => {
         if (el.id == action.payload.orderId) {
           el.products.push(action.payload);
