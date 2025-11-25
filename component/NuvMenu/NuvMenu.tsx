@@ -17,7 +17,7 @@ export default function NuvMenu() {
       <div>
         <div className={styles.NuvMenu__user_wrapp}>
           <img src="user.jpg" alt="user" />
-          <div /*onClick={}*/>
+          <div>
             <img src="gear.svg" alt="gear" />
           </div>
         </div>
@@ -26,7 +26,7 @@ export default function NuvMenu() {
             <Link href="/">ПРИХОД</Link>
           </li>
           <li>
-            <Link href="/Group">ГРУППЫ</Link>
+            <Link href="#">ГРУППЫ</Link>
           </li>
           <li>
             <Link href="#">ПРОДУКТЫ</Link>

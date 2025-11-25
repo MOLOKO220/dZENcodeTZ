@@ -1,0 +1,129 @@
+.popup {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup_active {
+  display: flex !important;
+}
+
+.body {
+  height: 400px;
+  width: 300px;
+  background: white;
+  border-radius: 5px;
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+  font-family: "Roboto", sans-serif;
+
+  h5 {
+    font-size: 20px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+
+    input {
+      background: rgb(241, 241, 241);
+      border: solid 1px rgb(134, 134, 134);
+      padding: 5px;
+      border-radius: 5px;
+      transition: 300ms;
+    }
+
+    p {
+      font-size: 11px;
+      color: red;
+      opacity: 0;
+      transition: 300ms;
+    }
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    // flex-direction: column;
+
+    select {
+      height: 30px;
+      width: 130px;
+      border: solid 1px black;
+      border-radius: 5px;
+      padding: 5px;
+      margin-left: 10px;
+    }
+  }
+
+  .CreateProductPopup__date_wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  footer {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    button {
+      padding: 5px;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: 300ms;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+
+    button:nth-child(1) {
+      background: red;
+    }
+    button:nth-child(2) {
+      background: green;
+    }
+  }
+}
+
+.error_title input {
+  border: solid 1px red !important;
+}
+
+.error_title p {
+  opacity: 1 !important;
+}
+
+.error_start input {
+  border-bottom: solid 4px red !important;
+}
+
+.error_end input {
+  border-bottom: solid 4px red !important;
+}
+
+.error_message {
+  font-size: 11px;
+  color: red;
+  opacity: 1 !important;
+}

@@ -1,6 +1,6 @@
-import React from "react";
-import NuvMenu from "component/NuvMenu/NuvMenu";
 import style from "./Wrapper.module.scss";
+
+import NuvMenu from "component/NuvMenu/NuvMenu";
 
 export default function Wrapper({ children }: any) {
   return (

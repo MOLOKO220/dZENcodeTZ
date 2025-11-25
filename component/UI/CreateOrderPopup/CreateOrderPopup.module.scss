@@ -1,0 +1,120 @@
+.addButton {
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #7cb342;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  transition: 200ms;
+  margin-right: 10px;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+
+  > div {
+    line-height: 18px;
+  }
+}
+
+.Orders__popup {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+
+  > div {
+    height: 150px;
+    width: 280px;
+    max-width: 95%;
+    background: white;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
+
+    h5 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      width: 100%;
+
+      > input {
+        background: rgb(241, 241, 241);
+        border: solid 1px rgb(134, 134, 134);
+        padding: 6px 8px;
+        border-radius: 5px;
+        transition: 200ms;
+        width: 100%;
+      }
+
+      > p {
+        font-size: 11px;
+        color: red;
+        opacity: 0;
+        margin: 4px 0 0;
+        transition: 200ms;
+      }
+    }
+
+    footer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      padding-top: 6px;
+
+      button {
+        padding: 6px 10px;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:first-child {
+        background: #d32f2f;
+      }
+      button:last-child {
+        background: #388e3c;
+      }
+    }
+  }
+}
+
+.Orders__popup__active {
+  display: flex;
+}
+
+.Orders__popup__errorInput {
+  border: 1px solid red !important;
+}
+
+.Orders__popup__errorText {
+  opacity: 1 !important;
+}
