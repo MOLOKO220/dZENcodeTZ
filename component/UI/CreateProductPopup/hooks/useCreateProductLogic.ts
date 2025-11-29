@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import nextId from "react-id-generator";
 
-import { addProduct } from "@/storage/mainReducer";
+import { createProductThunk } from "@/storage/mainReducer";
 
 import type { ProductType, OrderType } from "@/types/types";
 
@@ -70,7 +70,7 @@ export function useCreateProductLogic(params: Params) {
   const typeDefault = typeValue || types[0] || "";
   const specDefault = specValue || specifications[0] || "";
 
-  const createProduct = () => {
+  const createProduct = async () => {
     // some validation
     let valid = true;
 
@@ -106,7 +106,16 @@ export function useCreateProductLogic(params: Params) {
       date: new Date().toISOString(),
     };
 
-    dispatch(addProduct(newProduct));
+    try {
+      await dispatch(
+        createProductThunk({ orderId, productData: newProduct }) as any
+      );
+    } catch (err) {
+      console.error(
+        "/useCreateProductLogic.ts [createProduct] dispatch failed",
+        err
+      );
+    }
     close();
   };
 

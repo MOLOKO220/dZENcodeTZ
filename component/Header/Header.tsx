@@ -6,6 +6,8 @@ import style from "./Header.module.scss";
 
 import { useDateTime } from "./hooks/useDateTime";
 import { useSearchHandler } from "./hooks/useSearchHandler";
+// Component
+import ActiveSessionsCounter from "@/component/UI/ActiveSessionsCounter/ActiveSessionsCounter";
 
 export default function Header() {
   const { day, date, time } = useDateTime();
@@ -30,6 +32,7 @@ export default function Header() {
             <span>{date}</span>
             <Image src="/watch.svg" width={16} height={16} alt="watch" />
             <span>{time}</span>
+            <ActiveSessionsCounter />
           </div>
         </div>
       </div>

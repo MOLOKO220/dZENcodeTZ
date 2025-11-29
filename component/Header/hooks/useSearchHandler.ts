@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import {
   setSearchOrderTerm,
@@ -8,15 +8,13 @@ import {
 } from "../../../storage/mainReducer";
 
 export function useSearchHandler() {
-  const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch();
 
   function searchHandler(value: string) {
-    const currentPage = router.pathname;
-
-    if (currentPage === "/") {
+    if (pathname === "/") {
       dispatch(setSearchOrderTerm(value));
-    } else if (currentPage === "/[id]") {
+    } else if (/^\/\d+$/.test(pathname)) {
       dispatch(setSearchProductTerm(value));
     }
   }

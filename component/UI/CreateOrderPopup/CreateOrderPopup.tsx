@@ -44,7 +44,14 @@ export default function CreateOrderPopup() {
             </p>
           </label>
           <footer>
-            <button onClick={() => setOpen(false)}>Отмена</button>
+            <button
+              onClick={() => {
+                setOpen(false);
+                setTitle("");
+              }}
+            >
+              Отмена
+            </button>
             <button onClick={createOrder}>Создать</button>
           </footer>
         </div>

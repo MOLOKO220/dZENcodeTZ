@@ -16,13 +16,14 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
+      "@/component/*": ["component/*"],
       "@/pages/*": ["pages/*"],
       "@/styles/*": ["styles/*"],
       "@/storage/*": ["storage/*"],
       "@/types/*": ["types/*"],
       "@/utils/*": ["utils/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/firebase/*": ["firebase/*"]
     }
   },
   "include": [

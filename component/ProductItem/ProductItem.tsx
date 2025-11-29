@@ -4,7 +4,7 @@ import Image from "next/image";
 import type { ProductType } from "@/types/types";
 
 import { useDispatch } from "react-redux";
-import { removeProduct } from "@/storage/mainReducer";
+import { deleteProductThunk } from "@/storage/mainReducer";
 // utils
 import { formatDate } from "@/utils/formatDate";
 // components
@@ -18,8 +18,12 @@ interface ProductItemProps {
 export default function ProductItem({ product, orderTitle }: ProductItemProps) {
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
-    dispatch(removeProduct({ id: product.id, orderId: product.orderId }));
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteProductThunk({ orderId: product.orderId, productId: product.id }) as any);
+    } catch (err) {
+      console.error('[TRACE deleteProduct] dispatch failed', err);
+    }
   };
 
   const priceUSD = product.price.find((p) => p.symbol === "USD")?.value ?? 0;

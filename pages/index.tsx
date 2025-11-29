@@ -16,7 +16,9 @@ export default function OrdersPage() {
   // filtering orders by input from header
   const filteredOrders = useMemo(() => {
     const term = searchOrderTerm.toLowerCase();
-    return orders.filter((order) => order.title.toLowerCase().includes(term));
+    return orders.filter((order) => 
+      order.title ? order.title.toLowerCase().includes(term) : false
+    );
   }, [orders, searchOrderTerm]);
 
   return (

@@ -6,10 +6,12 @@ export function useOrderPrices(products: ProductType[]) {
     let USD = 0;
     let UAH = 0;
 
-    products.forEach((p) => {
-      USD += p.price[0].value;
-      UAH += p.price[1].value;
-    });
+    if (products) {
+      products.forEach((p) => {
+        USD += p.price[0].value;
+        UAH += p.price[1].value;
+      });
+    }
 
     return { USD, UAH };
   }, [products]);

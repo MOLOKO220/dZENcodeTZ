@@ -38,12 +38,16 @@ export function useProductFilters({
       return true;
     });
 
-    // filter by input from header
     const searchFiltered = filtered.filter((p) =>
       p.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    setFilteredProducts(searchFiltered);
+    setFilteredProducts((prev) => {
+      const prevIds = prev.map((p) => p.id).join(",");
+      const newIds = searchFiltered.map((p) => p.id).join(",");
+      if (prevIds === newIds) return prev;
+      return searchFiltered;
+    });
   }, [products, typesSelect, specSelect, searchTerm]);
 
   return {

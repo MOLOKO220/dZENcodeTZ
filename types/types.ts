@@ -35,4 +35,5 @@ export interface StoreType {
   orders: OrderType[];
   searchOrderTerm: string;
   searchProductTerm: string;
+  loading?: boolean;
 }

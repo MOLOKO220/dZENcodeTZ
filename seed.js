@@ -1,4 +1,21 @@
-export const ordersData = [
+// seed injection
+
+require("dotenv").config({ path: ".env.local" });
+const { initializeApp } = require("firebase/app");
+const { getDatabase, ref, set } = require("firebase/database");
+
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
+
+const ordersData = [
   {
     id: "1",
     title: "Order 1",
@@ -450,3 +467,29 @@ export const ordersData = [
     ],
   },
 ];
+
+async function seedDatabase() {
+  try {
+    console.log("🌱 Инициализация Firebase...");
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    console.log("📦 Конвертация данных в объект по ID...");
+    const ordersObj = {};
+    ordersData.forEach((order) => {
+      ordersObj[order.id] = order;
+    });
+
+    console.log(`📤 Загрузка ${ordersData.length} заказов в Firebase...`);
+    await set(ref(database, "orders"), ordersObj);
+
+    console.log("✅ Seed завершен успешно!");
+    console.log(`✅ Загружено ${ordersData.length} заказов`);
+    process.exit(0);
+  } catch (error) {
+    console.error("❌ Ошибка при загрузке seed:", error);
+    process.exit(1);
+  }
+}
+
+seedDatabase();

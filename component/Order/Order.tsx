@@ -2,7 +2,7 @@ import Link from "next/link";
 import style from "./Order.module.scss";
 
 import { useDispatch } from "react-redux";
-import { removeOrder } from "../../storage/mainReducer";
+import { deleteOrderThunk } from "../../storage/mainReducer";
 
 import type { OrderType } from "../../types/types";
 // hooks
@@ -16,7 +16,13 @@ export default function Order({ data }: { data: OrderType }) {
   const { USD, UAH } = useOrderPrices(data.products);
 
   const dispatch = useDispatch();
-  const deleteOrder = () => dispatch(removeOrder(data.id));
+  const deleteOrder = async () => {
+    try {
+      await dispatch(deleteOrderThunk(data.id) as any);
+    } catch (err) {
+      console.error("[TRACE deleteOrder] dispatch failed", err);
+    }
+  };
 
   return (
     <li className={style.Order}>
@@ -34,7 +40,7 @@ export default function Order({ data }: { data: OrderType }) {
         </Link>
 
         <div className={style.Order__product}>
-          <div>{data.products.length}</div>
+          <div>{data.products ? data.products.length : "0"}</div>
           <p>Продукта</p>
         </div>
 

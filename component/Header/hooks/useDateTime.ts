@@ -12,15 +12,18 @@ const days = [
 ];
 
 export function useDateTime() {
-  const [now, setNow] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
+  const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setNow(new Date());
-    }, 1000);
-
+    setMounted(true);
+    const tick = () => setNow(new Date());
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
+
+  if (!mounted || !now) return { day: "", date: "", time: "" };
 
   const day = days[now.getDay()];
   const date = now.toLocaleString("ru", {
@@ -28,7 +31,6 @@ export function useDateTime() {
     month: "long",
     year: "numeric",
   });
-
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
   const time = `${hours}:${minutes}`;
