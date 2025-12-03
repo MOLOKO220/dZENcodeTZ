@@ -87,7 +87,7 @@
 
 ### Docker
 
-- Архив в корне проекта: `assets/my-next-app.tar`.
+- Архив доступен по ссылки: [google disk](https://drive.google.com/file/d/15VVk51BaAWAaZ5v8sG6JTaVk0IXrrLGZ/view?usp=sharing)
 
 ---
 
