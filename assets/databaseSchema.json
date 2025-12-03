@@ -1,0 +1,29 @@
+{
+  "activeSessions": {
+    "<sessionId>": true
+  },
+
+  "orders": {
+    "<orderId>": {
+      "id": "<string>",
+      "title": "<string>",
+      "description": "<string>",
+      "date": "<YYYY-MM-DD HH:mm:ss>",
+      "products": {
+        "<productId>": {
+          "id": "<string>",
+          "img": "<string | null>",
+          "name": "<string>",
+          "type": "<string>",
+          "specification": "<string>",
+          "warrantyStart": "<YYYY-MM-DD>",
+          "warrantyEnd": "<YYYY-MM-DD>",
+          "priceUSD": "<number>",
+          "priceUAH": "<number>",
+          "orderName": "<string>",
+          "createdAt": "<YYYY-MM-DD HH:mm:ss>"
+        }
+      }
+    }
+  }
+}
